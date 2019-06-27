@@ -25,7 +25,7 @@ const json = fs.readFileSync('./data/data.json');
 const server = http.createServer((req, res)=>{
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
-    const objectId = parsedUrl.query;
+    const queryObject = parsedUrl.query;
     const jsonData = JSON.parse(json);
     
     if(pathname === '/' || pathname === '/overview'){
@@ -39,7 +39,7 @@ const server = http.createServer((req, res)=>{
             res.end(data)
         })
     }else if( pathname === '/product'){
-        renderHtml(false, jsonData[objectId.id] ,function(statusCode, type, data){
+        renderHtml(false, jsonData[queryObject.id] ,function(statusCode, type, data){
             type = type ? type : '';
             statusCode = statusCode ? statusCode : 200;
             data = data ? data : {};
